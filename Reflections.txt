@@ -1,0 +1,11 @@
+Descriptions of the different PID components:
+
+1) The P component describes the propotionality between the cross-track error (CTE) and the control. This is basically the CTE. If this is the only component used, or if its weight is too large, this would cause oscillations around the desired path. If it is too low, we may miss sharp turns.
+
+2) The I component describes accumulated error. It compensates for biases of the car. Not used in this project.
+
+3) The D (differential) component acts to reduce the oscillations caused by the P component. It measures the trend of the error and becomes smaller as we get closer to the desired path.
+
+Parameter tuning:
+
+I used the Twiddle algorithm to tune the weights of the PID components. I started with initial values of w_p=0.1, w_i=0.0001, and w_d=1. Each iteration of twiddle ran for nearly the entire length of the track in order to capture all the various turns. Untimately, the best configuration considerably reduced the error. Final configuration was: w_p=0.???, w_i=0.0001, and w_d=???
