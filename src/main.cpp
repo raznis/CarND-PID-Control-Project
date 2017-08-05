@@ -35,7 +35,7 @@ int main()
   PID pid_s;
 //  PID pid_v;
   // TODO: Initialize the pid variable.
-  pid_s.Init(0.1,0.0,0.5);
+  pid_s.Init(0.14,0.0,3.5);
 //  pid_s.Init(0.102614,0.000389051,1.25284);
 //  pid_v.Init(0.456731, 0.0000, 0.0226185);
   h.onMessage([&pid_s](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length, uWS::OpCode opCode) {
@@ -55,23 +55,11 @@ int main()
           double angle = std::stod(j[1]["steering_angle"].get<std::string>());
           double steer_value;
           double throttle_value;
-          /*
-          * TODO: Calcuate steering value here, remember the steering value is
-          * [-1, 1].
-          * NOTE: Feel free to play around with the throttle and speed. Maybe use
-          * another PID controller to control the speed!
-          */
+
           pid_s.UpdateError(cte);
 		  steer_value = -pid_s.TotalError();
 
-//		  pid_v.UpdateError(fabs(cte));
-//		  throttle_value = 0.75 -pid_v.TotalError();
-          // DEBUG
-//          std::cout << "CTE: " << cte << " Steering Value: " << steer_value << std::endl;
-
-		  // uncomment the following lines to tweak the controller using the
-		  // twiddle algorithm
-//		  std::cout << pid_s.step << ", " << pid_s.num_twiddle_time_steps_ << ", " << pid_s.best_averaged_error_ <<std::endl;
+		  // uncomment below to use the twiddle algorithm
 		  if(pid_s.IsTwiddleTimeIntervalComplete())
 		   {
 			   pid_s.PrintCurrentSettings();
@@ -83,7 +71,7 @@ int main()
 
           json msgJson;
           msgJson["steering_angle"] = steer_value;
-          msgJson["throttle"] = 0.2;
+          msgJson["throttle"] = 0.25;
           auto msg = "42[\"steer\"," + msgJson.dump() + "]";
 //          std::cout << msg << std::endl;
           ws.send(msg.data(), msg.length(), uWS::OpCode::TEXT);

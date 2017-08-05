@@ -25,7 +25,7 @@ void PID::Init(double Kp, double Ki, double Kd) {
 
 	current_averaged_error_   = 0.0;
 	current_time_step_        = 0;
-	best_averaged_error_      = 1e9;
+	best_averaged_error_      = 1000000;
 	num_twiddle_time_steps_   = 750;
 	current_tweak_dimension_  = 0;
 	tried_decreasing_ = false;
@@ -110,8 +110,8 @@ void PID::DoTwiddleTweak()
 
 void PID::PrintCurrentSettings()
 {
-  std::cout << "current_averaged_error_ " << current_averaged_error_ << " current_tweak_dimension_ " << current_tweak_dimension_;
-  std::cout << " Kp_ :" <<  Kp << " Ki_ :" <<  Ki << " Kd_ :" <<  Kd ;
+  std::cout << "current_average_error " << current_averaged_error_ << " current_tweak_dimension " << current_tweak_dimension_;
+  std::cout << " Kp :" <<  Kp << " Ki :" <<  Ki << " Kd :" <<  Kd ;
   std::cout << " dKp_ :" <<  dKp_ << " dKi_ :" <<  dKi_ << " Kd_ :" <<  dKd_ << std::endl;
 }
 
