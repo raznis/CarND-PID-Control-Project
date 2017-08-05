@@ -8,4 +8,4 @@ Descriptions of the different PID components:
 
 Parameter tuning:
 
-I used the Twiddle algorithm to tune the weights of the PID components. I started with initial values of w_p=0.1, w_i=0.0001, and w_d=1. Each iteration of twiddle ran for nearly the entire length of the track in order to capture all the various turns. Untimately, the best configuration considerably reduced the error. Final configuration was: w_p=0.???, w_i=0.0001, and w_d=???
+I used the Twiddle algorithm to tune the weights of the PID components. I started with initial values of w_p=0.1, w_i=0.0001, and w_d=1. Each iteration of twiddle ran for nearly the entire length of the track in order to capture all the various turns. Untimately, the best configuration considerably reduced the error. Final configuration was: w_p=0.102, w_i=0.0001, and w_d=3.6314
